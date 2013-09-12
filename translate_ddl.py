@@ -18,7 +18,6 @@ for table in splitTables:
 # Below for testing only
 for table in SQLServerTables:
 	tabXML = table.genXML()
-	ET.dump(tabXML)
 	
 
 # 	for column in table.columns:
