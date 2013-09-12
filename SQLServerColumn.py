@@ -15,3 +15,9 @@ class SQLServerColumn(object):
 		self.length = length
 		self.precision = precision
 		self.isNullable = isNullable
+
+	def getAttributes(self):
+		#Build dictionary of getAttributes
+		return dict(name=self.name, dataType=self.dataType, length=str(self.length), precision=str(self.precision), nullable=str(self.isNullable))
+
+	

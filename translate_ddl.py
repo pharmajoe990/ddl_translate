@@ -2,6 +2,8 @@
 
 from SQLServer import *
 
+import xml.etree.cElementTree as ET
+	
 SQLServerTables = list()
 
 splitTables = parseFile('Master_Current_CM.sql')
@@ -15,7 +17,8 @@ for table in splitTables:
 
 # Below for testing only
 for table in SQLServerTables:
-	table.genXML()
+	tabXML = table.genXML()
+	ET.dump(tabXML)
 	
 
 # 	for column in table.columns:

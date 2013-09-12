@@ -20,11 +20,12 @@ class SQLServerTable(object):
 	def genXML(self):
 		#Generate XML representing the table in 
 		tableName = dict(name=self.name)
-		table = ET.Element('table', tableName)
-		# for column in columns
+		tableXML = ET.Element('table', tableName)
+		for column in self.columns:
 			#Get XML for all columns
+			colXML = ET.SubElement(tableXML, 'column', column.getAttributes())
 			
 
-		ET.dump(table)
+		# ET.dump(tableXML)
 
-		# return 'foo'
+		return tableXML
