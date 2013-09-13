@@ -17,10 +17,6 @@ class Translator(object):
 
 	DBMSTypes = ('SQLServer', 'DB2');
 
-	sourceTables = list()
-	targetTables = list()
-	# sourceXML = 
-
 	def __init__(self, source, target, sourceFile):
 		if source not in self.DBMSTypes:
 			print source, ' Not a known DBMS, known are:'
@@ -34,15 +30,9 @@ class Translator(object):
 		#Switch on the source type
 		if source == 'SQLServer':
 			source = SQLServer(sourceFile);
-			# splitTables = source.parseFile(sourceFile)
 			print "Parsing table"
 			for table in source.tables:
-				self.sourceTables.append(source.parseTable(table))
-			# Below for testing only
-			for table in self.sourceTables:
-				tabXML = table.genXML()
-				ET.dump(tabXML)
-			# source = new SQLServer(sourceFile)
+				ET.dump(source.parseTable(table).genXML())
 
 	def printTypes(self):		
 		for type in self.DBMSTypes:

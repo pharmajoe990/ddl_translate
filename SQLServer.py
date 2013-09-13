@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-# SQL Server functionality
-
 import re
 import pdb
 
@@ -17,18 +15,13 @@ class SQLServer(object):
 	tables = list()
 
 	def __init__(self, fileName):
-		"""Create an SQLServer parsed from DDL file.
-		1. Parse the input file into tables
-		2. 
-		"""
-		tables = self.parseFile(fileName)
+		"""Create an SQLServer parsed from DDL file"""
+		# tables = self.
+		self.parseFile(fileName)
 		print "Read", len(self.tables), "Tables from DDL"
-
-
 	
-
-	#Parse SQL Server DDL file into distinct objects
 	def parseFile(self, fileName ):
+		"""Parse SQL Server DDL file into distinct objects"""
 		# Read the file
 		inputfile = open(fileName, 'r')
 		print "Parsing", inputfile.name
@@ -51,10 +44,8 @@ class SQLServer(object):
 				self.tables.append(tableText)			
 				tableText = ""
 
-		return self.tables;
-
-	# Parse a specific single table DDL into Standard XML
 	def parseTable(self, tableDDL ):
+		"""Parse a specific single table DDL into Standard XML"""
 
 		tableSchema = ""
 		tableName = ""
@@ -63,25 +54,17 @@ class SQLServer(object):
 		lines = tableDDL.splitlines()
 		for line in lines:
 			#Get table name eg. "CREATE TABLE [dbo].[Master_Current_CM_2]"
-			# if re.match(("CREATE TABLE"), line):	
 			if 'CREATE TABLE' in line:
 				tableName = re.findall((r'\[\w+\]'), line)			
 				tableSchema = tableName[0].strip('[]')
 				tableName = tableName[1].strip('[]')
-				# print 'Table schema: ', tableDetails
-				# print 'Table name: ', tableDetails[1]
-				# tableSchema = 
-				# tableName = re.match()
 			elif 'NULL,' in line:
 				#Standard column def
 				colDetails = re.findall((r'\[[\w\s]+\]'), line)
 				colName = colDetails[0].strip('[]')
 				dataType = colDetails[1].strip('[]')			
-				# print 'Column name', colName
-				# print 'data type', dataType
 				colLen = re.search((r'\([\d\,\s\d]+\)'), line)
 				if colLen:
-					# print 'Length', colLen.group()
 					lengthPrec = colLen.group().strip('()').split(',')
 					length = lengthPrec[0]
 					if len(lengthPrec) == 2:
@@ -95,8 +78,7 @@ class SQLServer(object):
 					isNullable = True
 				tableCols.append(SQLServerColumn(colName, dataType, length, precision, isNullable))
 			elif 'PRIMARY KEY' in line:
-				#TODO
-				#Parse Constraint
+				#TODO Parse Constraint
 				constDtls = re.findall((r'\[[\w\s]+\]|PRIMARY\sKEY|NONCLUSTERED'), line)
 
 		return SQLServerTable(tableName, tableSchema, tableCols);
