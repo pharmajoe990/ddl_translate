@@ -14,13 +14,26 @@ class SQLServer(object):
 	#All SQL Server datatypes. Used for error checking mapping translations between DBMSes
 	dataTypes = ('numeric', 'varchar', 'char', 'nvarchar', 'money', 'datetime', 'int', 'decimal', 'float', 'uniqueidentifier');
 
+	tables = list()
+
+	def __init__(self, fileName):
+		"""Create an SQLServer parsed from DDL file.
+		1. Parse the input file into tables
+		2. 
+		"""
+		tables = self.parseFile(fileName)
+		print "Read", len(self.tables), "Tables from DDL"
+
+
+	
+
 	#Parse SQL Server DDL file into distinct objects
 	def parseFile(self, fileName ):
 		# Read the file
 		inputfile = open(fileName, 'r')
 		print "Parsing", inputfile.name
 
-		tables = list()
+		# tables = list()
 		extractLine = False
 		tableText = ""
 
@@ -35,10 +48,10 @@ class SQLServer(object):
 			if re.match(("\) ON \[PRIMARY\]"), line):
 				#Table def finished - grab last line and dump to list			
 				extractLine = False
-				tables.append(tableText)			
+				self.tables.append(tableText)			
 				tableText = ""
 
-		return tables;
+		return self.tables;
 
 	# Parse a specific single table DDL into Standard XML
 	def parseTable(self, tableDDL ):
