@@ -6,13 +6,15 @@ import xml.etree.cElementTree as ET
 	
 SQLServerTables = list()
 
-splitTables = parseFile('Master_Current_CM.sql')
+source = SQLServer();
+
+splitTables = source.parseFile('Master_Current_CM.sql')
 
 print "Read", len(splitTables), "Tables from DDL"
 	
 for table in splitTables:
 	print "Parsing table"
-	SQLServerTables.append(parseTable(table))
+	SQLServerTables.append(source.parseTable(table))
 
 
 # Below for testing only

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 class SQLServerColumn(object):
-	'An SQL Server DB Column'
+	"""An SQL Server DB Column"""
 
 	name = ""
 	dataType = ""
@@ -17,7 +17,7 @@ class SQLServerColumn(object):
 		self.isNullable = isNullable
 
 	def getAttributes(self):
-		#Build dictionary of getAttributes
+		"""Build dictionary of getAttributes"""
 		return dict(name=self.name, dataType=self.dataType, length=str(self.length), precision=str(self.precision), nullable=str(self.isNullable))
 
 	
