@@ -1,31 +1,22 @@
 #!/usr/bin/python
 
-class SQLServerColumn(object):
+from Column import Column
+
+class SQLServerColumn(Column):
 	"""An SQL Server DB Column"""
 
-	name = ""
 	dataType = ""
-	length = ""
-	precision = ""
-	isNullable = False
 
-		#All SQL Server datatypes. Used for error checking mapping translations between DBMSes
+	#All SQL Server datatypes. Used for error checking mapping translations between DBMSes
 	dataTypes = ('numeric', 'varchar', 'char', 'nvarchar', 'money', 'datetime', 'int', 'decimal', 'float', 'uniqueidentifier');
 
 	def __init__(self, name, dataType, length, precision, isNullable):
-		self.name = name
-		self.length = length
-		self.precision = precision
-		self.isNullable = isNullable
-		setType(dataType)
+		super(SQLServerColumn, self).__init__(name, length, precision, isNullable)
+		self.setDataType(dataType)
 
-	def getAttributes(self):
-		"""Build dictionary of getAttributes"""
-		return dict(name=self.name, dataType=self.dataType, length=str(self.length), precision=str(self.precision), nullable=str(self.isNullable))
-
-	def checkDataType(self, dataType):
+	def setDataType(self, dataType):
 		"""Validates Datatypes are allowable"""
-		if dataType not in self.datatypes
+		if dataType not in self.dataTypes:
 			#Invalid dataType
 			#TODO Implement exception
 			print dataType, 'not valid MSSQL type'
