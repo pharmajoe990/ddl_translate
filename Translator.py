@@ -32,7 +32,8 @@ class Translator(object):
 			source = SQLServer(sourceFile);
 			print "Parsing table"
 			for table in source.tables:
-				ET.dump(source.parseTable(table).genXML())
+				# ET.dump(source.parseTable(table).genXML())
+				# Translate to target DBMS
 
 	def printTypes(self):		
 		for type in self.DBMSTypes:

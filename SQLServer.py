@@ -9,9 +9,6 @@ from SQLServerTable import *
 class SQLServer(object):
 	"""SQLServer functionality"""
 
-	#All SQL Server datatypes. Used for error checking mapping translations between DBMSes
-	dataTypes = ('numeric', 'varchar', 'char', 'nvarchar', 'money', 'datetime', 'int', 'decimal', 'float', 'uniqueidentifier');
-
 	tables = list()
 
 	def __init__(self, fileName):
@@ -26,7 +23,6 @@ class SQLServer(object):
 		inputfile = open(fileName, 'r')
 		print "Parsing", inputfile.name
 
-		# tables = list()
 		extractLine = False
 		tableText = ""
 
