@@ -27,13 +27,16 @@ class Translator(object):
 			self.printTypes()
 			exit()
 
-		#Switch on the source type
-		if source == 'SQLServer':
-			source = SQLServer(sourceFile);
-			print "Parsing table"
-			for table in source.tables:
-				ET.dump(source.parseTable(table).genXML())
+		
+
+		# Switch on the source type
+		# if source == 'SQLServer':
+		# 	sourceDB = SQLServer(sourceFile);						
+		# 	print "Parsing table"
+		# 	for table in sourceDB.tables:
+		# 		ET.dump(sourceDB.parseTable(table).genXML())
 				# Translate to target DBMS
+				
 
 	def printTypes(self):		
 		for type in self.DBMSTypes:
