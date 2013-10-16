@@ -1,0 +1,3 @@
+<mapping sourceDBMS="SQLServer" targetDBMS="DB2">
+	<dataTypeMapping sourceType="money" targetType="decimal" />
+</mapping>
