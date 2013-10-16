@@ -27,7 +27,7 @@ class Translator(object):
 			self.printTypes()
 			exit()
 
-		
+				
 
 		# Switch on the source type
 		# if source == 'SQLServer':

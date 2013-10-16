@@ -1,5 +1,4 @@
 .DS_Store
 *.pyc
-DB2.py
 test_output.xml
 test.py
